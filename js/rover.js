@@ -22,8 +22,8 @@ class Rover {
 
         //paint it
         push()
-        stroke(200, 0, 0)
-        fill(200, 0, 0)
+        stroke(0)
+        fill(255, 153, 51)
         //rectMode(CENTER)
         let realX = this.pos.x * gridsize
         let realY = this.pos.y * gridsize

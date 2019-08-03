@@ -80,12 +80,6 @@ function draw() {
         }
     }
 
-
-    rover.update()
-    if (rover.hasMoved) {
-        navi.restart(rover.pos, goal)
-        rover.hasMoved = false
-    }
     //check if elements are scanned
 
     //for (let i = 0; i < 1; i++) {
@@ -116,6 +110,12 @@ function draw() {
             fill(255)
             rect(r.x * gridsize, r.y * gridsize, gridsize, gridsize)
         }
+
+    rover.update()
+    if (rover.hasMoved) {
+        navi.restart(rover.pos, goal)
+        rover.hasMoved = false
+    }
 
     //the goal point
     noStroke()
