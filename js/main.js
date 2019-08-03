@@ -19,19 +19,30 @@ function setup() {
     gridCols = width / gridsize
     gridRows = height / gridsize
 
+    //add some noise for terrain modelling
+    let colOff = 0
+
     grid = make2DArray(width / gridsize, height / gridsize)
     //init the grip
     let counter = 0
     for (let i = 0; i < grid.length; i++) {
+        let rowOff = 0
         for (let j = 0; j < grid[i].length; j++) {
             grid[i][j] = new Cell(i, j, gridsize, counter)
+            let r = noise(rowOff, colOff) * 50
+            //set r=1 to switch noise off
+            //r = 1
+            grid[i][j].travelcost = r
             counter++;
+            rowOff = rowOff + 0.3
         }
+        colOff = colOff + 0.3
     }
     rover = new Rover(gridsize)
 
+
     //create the obstacles
-    let obstacles = new Array(floor(random(20, 40)))
+    let obstacles = new Array(floor(random(15, 40)))
     for (let o = 0; o < obstacles.length; o++) {
         obstacles[o] = new Obstacle(gridsize)
         //get cells that are inside the obstacle and mark them as not navigatable
@@ -149,5 +160,19 @@ function keyReleased() {
         case LEFT_ARROW:
             rover.setDir(0, 0)
             break
+    }
+}
+
+function mouseDragged(event) {
+    //console.log("click", event)
+    let gridX = floor(event.clientX / gridsize)
+    let gridY = floor(event.clientY / gridsize)
+
+    for (let i = -2; i <= 2; i++) {
+        gridX = gridX + i
+        gridY = gridY + i
+        if (gridX >= 0 && gridX < gridCols && gridY >= 0 && gridY < gridRows) {
+            grid[gridX][gridY].travelcost = 1
+        }
     }
 }

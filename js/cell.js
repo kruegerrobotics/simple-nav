@@ -7,6 +7,7 @@ class Cell {
         this.revealed = true
         this.timesVisited = 0
         this.navigatable = true
+        this.travelcost = 1
     }
 
     update() {
@@ -14,7 +15,8 @@ class Cell {
         stroke(120)
         if (this.revealed) {
             if (this.navigatable==true) {
-                fill(110,0)
+                fill(110-this.travelcost)
+                //console.log(this.travelcost)
             }
             else {
                 fill(0,255)

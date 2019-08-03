@@ -66,10 +66,13 @@ class AStar {
         let distX = Math.abs(nodeA.pos.x - nodeB.pos.x)
         let distY = Math.abs(nodeA.pos.y - nodeB.pos.y)
 
+        //get travelcost throught nodeA
+        let tc = grid[nodeA.pos.x][nodeA.pos.y].travelcost
+
         if (distX > distY) {
-            return 14 * distY + 10 * (distX - distY)
+            return 14 * tc * distY + 10 * tc *(distX - distY)
         } else {
-            return 14 * distX + 10 * (distY - distX)
+            return 14 * tc* distX + 10 * tc * (distY - distX)
         }
     }
 
