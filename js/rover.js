@@ -1,15 +1,17 @@
 class Rover {
     constructor(_gridsize) {
         this.gridsize = _gridsize
-        this.pos = createVector(2, 2)
+        this.pos = createVector(1, 1)
         this.vel = createVector(0, 0)
-        this.scanRange = 80
+        this.scanRange = 100
+        this.hasMoved = false
     }
 
     setDir(x, y) {
         this.vel.x = x
         this.vel.y = y
-        this.vel.mult(this.gridsize)
+        //this.vel.mult(this.gridsize)
+        this.hasMoved = true
     }
 
     update() {
@@ -23,11 +25,12 @@ class Rover {
         stroke(200, 0, 0)
         fill(200, 0, 0)
         //rectMode(CENTER)
-        rect(this.pos.x, this.pos.y, this.gridsize, this.gridsize)
-        stroke(0, 200, 0)
+        let realX = this.pos.x * gridsize
+        let realY = this.pos.y * gridsize
+        rect(realX, realY, this.gridsize, this.gridsize)
         noFill()
         ellipseMode(CENTER)
-        ellipse(this.pos.x + this.gridsize / 2, this.pos.y + this.gridsize / 2, this.scanRange)
+        ellipse(realX + gridsize/2, realY+this.gridsize/2, this.scanRange)
         pop()
     }
 
