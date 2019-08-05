@@ -103,23 +103,26 @@ function draw() {
 
     navi.openNodes.forEach(function (node) {
         noStroke()
-        fill(0, 200, 0)
+        fill(0, 200, 0, 120)
         rect(node.pos.x * gridsize, node.pos.y * gridsize, gridsize, gridsize)
     })
 
     navi.closedNodes.forEach(function (node) {
         noStroke()
-        fill(200, 0, 0)
+        fill(200, 0, 0, 120)
         rect(node.pos.x * gridsize, node.pos.y * gridsize, gridsize, gridsize)
     })
-    fill(0, 0, 200)
+    fill(0, 0, 200, 120)
     rect(navi.currentNode.pos.x * gridsize, navi.currentNode.pos.y * gridsize, gridsize, gridsize)
 
     if (navi.arrived == true)
         for (let i = 0; i < navi.path.length; i++) {
             let r = navi.path[i].pos
+            push()
             fill(255)
-            rect(r.x * gridsize, r.y * gridsize, gridsize, gridsize)
+            rectMode(CENTER)
+            rect(r.x * gridsize + gridsize / 2, r.y * gridsize + gridsize / 2, gridsize / 2, gridsize / 2)
+            pop()
         }
 
     rover.update()
@@ -132,10 +135,6 @@ function draw() {
     noStroke()
     fill(255, 0, 255)
     rect(goal.x * gridsize, goal.y * gridsize, gridsize, gridsize)
-
-
-
-
 }
 
 function keyPressed() {
